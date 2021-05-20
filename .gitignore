@@ -1,1 +1,2 @@
-api/gpu-price-tracker-env/
+gpu-price-tracker-env/
+__pycache__/

@@ -1,27 +1,23 @@
-from typing import Optional
-
 from fastapi import FastAPI
-from pydantic import BaseModel
+from enum import Enum
+import json
 
 app = FastAPI()
 
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: Optional[bool] = None
-
-
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def read_root():
+    with open("price_list.json", "r") as pl_json:
+        pl_dict = json.load(pl_json)
+        return pl_dict
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+class ModelName(str, Enum):
+    rtx3070 = "rtx3070"
+    rtx3080 = "rtx3080"
+    rtx3090 = "rtx3090"
 
 
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
+@app.get("/models/")
+async def read_model(name: ModelName):
+    return {"model_name": name}

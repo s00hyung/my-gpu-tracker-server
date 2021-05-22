@@ -52,7 +52,7 @@ def write_json(final_list, json_dict):
 
     try:
         with open(constants.JSON_DIR, "w") as json_file:
-            json.dump(json_dict, json_file)
+            json.dump(json_dict, json_file, indent=4)
     except:
         logging.warning("Failed to write JSON file.")
     else:

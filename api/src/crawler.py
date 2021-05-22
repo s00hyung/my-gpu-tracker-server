@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, logging
 from utilities import constants, functions
 from bs4 import BeautifulSoup
 from collections import defaultdict
@@ -6,14 +6,17 @@ from collections import defaultdict
 
 def build_prices_list():
     final_list = []
+
     for gpu in constants.ALL_GPUS:
+        logging.warning(f"Pulling prices of {gpu['name']}...")
         new_dict = {}
         new_dict["name"] = gpu["name"]
         new_dict["prices"] = []
 
-        for link in gpu["links"]:
+        for i, link in enumerate(gpu["links"]):
             price = extract_and_return_price(link)
             if price:
+                logging.warning(f"[{i+1}] {price} KRW")
                 new_dict["prices"].append(int(price))
             else:
                 pass
@@ -26,7 +29,7 @@ def extract_and_return_price(url: str) -> str:
 
     try:
         req = requests.get(url)
-        soup = BeautifulSoup(req.text)
+        soup = BeautifulSoup(req.text, features="html.parser")
         # <em class="lowestPrice_num__3AlQ-">1,356,060</em>
         selected = soup.select("div > em")[0]
         # 1,356,060
@@ -36,6 +39,7 @@ def extract_and_return_price(url: str) -> str:
 
 
 def read_json():
+    logging.warning("Loading existing JSON file...")
     json_dict = {}
     with open(constants.JSON_DIR, "r") as json_file:
         json_dict = json.load(json_file)
@@ -50,20 +54,26 @@ def write_json(final_list, json_dict):
         with open(constants.JSON_DIR, "w") as json_file:
             json.dump(json_dict, json_file)
     except:
-        print("Failed to write JSON file")
+        logging.warning("Failed to write JSON file.")
     else:
-        print("Sucessfully wrote JSON file")
+        logging.warning("Sucessfully wrote JSON file.")
 
 
 def start():
+    logging.warning("----- Initiating Crawling -----")
     final_list = build_prices_list()
     json_dict = {}
     try:
         json_dict = read_json()
     except FileNotFoundError:
+        logging.warning("Existing JSON file not found!")
+        logging.warning("Writting new JSON file...")
         write_json(final_list, defaultdict(functions.nested_dict))
     else:
+        logging.warning("Updating existing JSON file.")
         write_json(final_list, json_dict)
+
+    logging.warning("----- Finisehd Crawling -----")
 
 
 start()

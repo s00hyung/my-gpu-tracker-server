@@ -1,5 +1,6 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-import src.crawler as crawler
+from src.utilities import *
+import src.crawler as crawlers
 
 
 sched = AsyncIOScheduler()

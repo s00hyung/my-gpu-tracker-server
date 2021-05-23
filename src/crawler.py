@@ -48,6 +48,7 @@ def read_json():
 
 def write_json(final_list, json_dict):
     today_date = functions.get_today_date()
+    json_dict["last-updated"] = today_date
     json_dict[today_date] = final_list
 
     try:
@@ -74,6 +75,3 @@ def start():
         write_json(final_list, json_dict)
 
     logging.warning("----- Finisehd Crawling -----")
-
-
-start()

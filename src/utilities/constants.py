@@ -38,7 +38,7 @@ RTX3060TI = {
 }
 
 RTX2080S = {
-    "name": "RTX2080SUPER",
+    "name": "RTX2080 SUPER",
     "links": [
         "https://search.shopping.naver.com/catalog/20900404384",
         "https://search.shopping.naver.com/catalog/20952208261",
@@ -64,12 +64,22 @@ RTX2060S = {
         "https://search.shopping.naver.com/catalog/27011287527",
     ],
 }
+
+RTX2060 = {
+    "name": "RTX2060",
+    "links": [
+        "https://search.shopping.naver.com/catalog/27177973522",
+        "https://search.shopping.naver.com/catalog/27011085528",
+    ],
+}
+
 ALL_GPUS = [
+    RTX2060,
     RTX2060S,
-    RTX2080S,
     RTX2070S,
-    RTX3060TI,
+    RTX2080S,
     RTX3060,
+    RTX3060TI,
     RTX3070,
     RTX3080,
     RTX3090,

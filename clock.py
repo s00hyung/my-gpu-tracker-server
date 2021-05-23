@@ -1,5 +1,8 @@
+import sys
+
+sys.path.insert(0, "src")
+
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from src.utilities import *
 import src.crawler as crawlers
 
 

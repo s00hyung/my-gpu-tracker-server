@@ -29,6 +29,50 @@ RTX3090 = {
         "https://search.shopping.naver.com/catalog/25733875525",
     ],
 }
-ALL_GPUS = [RTX3060, RTX3070, RTX3080, RTX3090]
+
+RTX3060TI = {
+    "name": "RTX3060 TI",
+    "links": [
+        "https://search.shopping.naver.com/catalog/25092091522",
+    ],
+}
+
+RTX2080S = {
+    "name": "RTX2080SUPER",
+    "links": [
+        "https://search.shopping.naver.com/catalog/20900404384",
+        "https://search.shopping.naver.com/catalog/20952208261",
+        "https://search.shopping.naver.com/catalog/20829250135",
+        "https://search.shopping.naver.com/catalog/20384844643",
+    ],
+}
+
+RTX2070S = {
+    "name": "RTX2070 SUPER",
+    "links": [
+        "https://search.shopping.naver.com/catalog/21032248310",
+        "https://search.shopping.naver.com/catalog/20052562449",
+        "https://search.shopping.naver.com/catalog/21232696836",
+    ],
+}
+
+RTX2060S = {
+    "name": "RTX2060 SUPER",
+    "links": [
+        "https://search.shopping.naver.com/catalog/27011085528",
+        "https://search.shopping.naver.com/catalog/20052562451",
+        "https://search.shopping.naver.com/catalog/27011287527",
+    ],
+}
+ALL_GPUS = [
+    RTX2060S,
+    RTX2080S,
+    RTX2070S,
+    RTX3060TI,
+    RTX3060,
+    RTX3070,
+    RTX3080,
+    RTX3090,
+]
 
 JSON_DIR = "price_list.json"

@@ -7,7 +7,7 @@ tz = pytz.timezone(constants.TZ)
 
 
 def get_today_date():
-    return str(datetime.today(tz).strftime("%Y-%m-%d"))
+    return str(datetime.now(tz).strftime("%Y-%m-%d"))
 
 
 def get_current_time():

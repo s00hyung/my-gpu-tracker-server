@@ -3,13 +3,14 @@ from datetime import datetime
 from collections import defaultdict
 from . import constants
 
+tz = pytz.timezone(constants.TZ)
+
 
 def get_today_date():
-    return str(datetime.today().strftime("%Y-%m-%d"))
+    return str(datetime.today(tz).strftime("%Y-%m-%d"))
 
 
 def get_current_time():
-    tz = pytz.timezone(constants.TZ)
     return str(datetime.now(tz).strftime("%Y-%m-%d-%H:%M:%S"))
 
 

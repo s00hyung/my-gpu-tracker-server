@@ -12,7 +12,6 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
-app = FastAPI()
 
 
 def update_prices():

@@ -1,156 +1,156 @@
 {
     "2021-05-23": [
         {
+            "average_price": 952430,
             "name": "RTX2060",
             "prices": [
                 814930,
                 1089930
-            ],
-            "average_price": 952430
+            ]
         },
         {
+            "average_price": 1122986,
             "name": "RTX2060 SUPER",
             "prices": [
                 1089930,
                 1276030,
                 1003000
-            ],
-            "average_price": 1122986
+            ]
         },
         {
+            "average_price": 1375853,
             "name": "RTX2070 SUPER",
             "prices": [
                 1278940,
                 1629440,
                 1219180
-            ],
-            "average_price": 1375853
+            ]
         },
         {
+            "average_price": 1777420,
             "name": "RTX2080 SUPER",
             "prices": [
                 1550000,
                 1864000,
                 1738580,
                 1957100
-            ],
-            "average_price": 1777420
+            ]
         },
         {
+            "average_price": 1189930,
             "name": "RTX3060",
             "prices": [
                 1189930
-            ],
-            "average_price": 1189930
+            ]
         },
         {
+            "average_price": 2342000,
             "name": "RTX3060 TI",
             "prices": [
                 2342000
-            ],
-            "average_price": 2342000
+            ]
         },
         {
+            "average_price": 1558416,
             "name": "RTX3070",
             "prices": [
                 1356060,
                 1228760,
                 2090430
-            ],
-            "average_price": 1558416
+            ]
         },
         {
+            "average_price": 3047430,
             "name": "RTX3080",
             "prices": [
                 2849930,
                 3244930
-            ],
-            "average_price": 3047430
+            ]
         },
         {
+            "average_price": 3905965,
             "name": "RTX3090",
             "prices": [
                 3540000,
                 4271930
-            ],
-            "average_price": 3905965
+            ]
         }
     ],
-    "last-updated": "2021-05-24-20:58:48",
     "2021-05-24": [
         {
+            "average_price": 942430,
             "name": "RTX2060",
             "prices": [
-                794950,
+                794930,
                 1089930
-            ],
-            "average_price": 942440
+            ]
         },
         {
+            "average_price": 1115320,
             "name": "RTX2060 SUPER",
             "prices": [
                 1089930,
                 1276030,
                 980000
-            ],
-            "average_price": 1115320
+            ]
         },
         {
+            "average_price": 1454190,
             "name": "RTX2070 SUPER",
             "prices": [
                 1278940,
                 1629440
-            ],
-            "average_price": 1454190
+            ]
         },
         {
+            "average_price": 1738652,
             "name": "RTX2080 SUPER",
             "prices": [
                 1394930,
                 1864000,
                 1738580,
                 1957100
-            ],
-            "average_price": 1738652
+            ]
         },
         {
+            "average_price": 1187200,
             "name": "RTX3060",
             "prices": [
                 1187200
-            ],
-            "average_price": 1187200
+            ]
         },
         {
+            "average_price": 2342000,
             "name": "RTX3060 TI",
             "prices": [
                 2342000
-            ],
-            "average_price": 2342000
+            ]
         },
         {
+            "average_price": 1558423,
             "name": "RTX3070",
             "prices": [
                 1356060,
                 1228760,
                 2090450
-            ],
-            "average_price": 1558423
+            ]
         },
         {
+            "average_price": 2877745,
             "name": "RTX3080",
             "prices": [
                 2785490,
                 2970000
-            ],
-            "average_price": 2877745
+            ]
         },
         {
+            "average_price": 3905975,
             "name": "RTX3090",
             "prices": [
                 3540000,
                 4271950
-            ],
-            "average_price": 3905975
+            ]
         }
-    ]
+    ],
+    "last-updated": "2021-05-24-21:19:28"
 }

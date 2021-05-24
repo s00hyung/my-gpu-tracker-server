@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 from .utilities import constants, functions
 
-
 def build_prices_list():
     final_list = []
 
@@ -53,7 +52,7 @@ def write_json(final_list, json_dict):
 
     try:
         with open(constants.JSON_DIR, "w") as json_file:
-            json.dump(json_dict, json_file, indent=4)
+            json.dump(json_dict, json_file, indent=4, sort_keys=True)
     except:
         logging.warning("Failed to write JSON file.")
     else:
@@ -75,3 +74,7 @@ def start_crawl():
         write_json(final_list, json_dict)
 
     logging.warning("----- Finisehd Crawling -----")
+
+
+if __name__ == "__main__":
+    start_crawl()

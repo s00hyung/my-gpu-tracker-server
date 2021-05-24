@@ -76,24 +76,24 @@
             "average_price": 3905965
         }
     ],
-    "last-updated": "2021-05-24",
+    "last-updated": "2021-05-24-20:58:48",
     "2021-05-24": [
         {
             "name": "RTX2060",
             "prices": [
                 794950,
-                1089950
+                1089930
             ],
-            "average_price": 942450
+            "average_price": 942440
         },
         {
             "name": "RTX2060 SUPER",
             "prices": [
-                1089950,
+                1089930,
                 1276030,
                 980000
             ],
-            "average_price": 1115326
+            "average_price": 1115320
         },
         {
             "name": "RTX2070 SUPER",
@@ -106,12 +106,12 @@
         {
             "name": "RTX2080 SUPER",
             "prices": [
-                1394950,
+                1394930,
                 1864000,
                 1738580,
                 1957100
             ],
-            "average_price": 1738657
+            "average_price": 1738652
         },
         {
             "name": "RTX3060",

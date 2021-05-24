@@ -48,7 +48,7 @@ def read_json():
 
 def write_json(final_list, json_dict):
     today_date = functions.get_today_date()
-    json_dict["last-updated"] = today_date
+    json_dict["last-updated"] = functions.get_current_time()
     json_dict[today_date] = final_list
 
     try:
@@ -60,7 +60,7 @@ def write_json(final_list, json_dict):
         logging.warning("Sucessfully wrote JSON file.")
 
 
-def start():
+def start_crawl():
     logging.warning("----- Initiating Crawling -----")
     final_list = build_prices_list()
     json_dict = {}

@@ -2,5 +2,4 @@ beautifulsoup4
 requests
 fastapi
 uvicorn[standard]
-apscheduler
 black

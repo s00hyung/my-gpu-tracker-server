@@ -1,13 +1,16 @@
-import math
+import math, pytz
 from datetime import datetime
 from collections import defaultdict
+from . import constants
 
 
 def get_today_date():
     return str(datetime.today().strftime("%Y-%m-%d"))
 
+
 def get_current_time():
-    return str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S"))
+    tz = pytz.timezone(constants.TZ)
+    return str(datetime.now(tz).strftime("%Y-%m-%d-%H:%M:%S"))
 
 
 def nested_dict():

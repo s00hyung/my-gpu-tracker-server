@@ -86,3 +86,4 @@ ALL_GPUS = [
 ]
 
 JSON_DIR = "./app/price_list.json"
+TZ = "Asia/Seoul"

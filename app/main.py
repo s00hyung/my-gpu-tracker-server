@@ -1,6 +1,6 @@
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-from .crawler import *
+from . import crawler
 
 app = FastAPI()
 
@@ -15,12 +15,12 @@ app.add_middleware(
 
 
 def update_prices():
-    start_crawl()
+    crawler.start_crawl()
 
 
 @app.get("/")
 def read_root():
-    return read_json()
+    return crawler.read_json()
 
 
 @app.get("/start")

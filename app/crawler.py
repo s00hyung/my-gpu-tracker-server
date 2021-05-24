@@ -1,7 +1,7 @@
 import requests, json, logging
-from utilities import constants, functions
 from bs4 import BeautifulSoup
 from collections import defaultdict
+from .utilities import constants, functions
 
 
 def build_prices_list():

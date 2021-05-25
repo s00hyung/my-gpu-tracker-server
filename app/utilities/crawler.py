@@ -1,7 +1,8 @@
 import requests, json, logging
 from bs4 import BeautifulSoup
 from collections import defaultdict
-from .utilities import constants, functions
+from . import constants, functions
+
 
 def build_prices_list():
     final_list = []

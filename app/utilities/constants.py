@@ -85,5 +85,5 @@ ALL_GPUS = [
     RTX3090,
 ]
 
-JSON_DIR = "./app/price_list.json"
+JSON_DIR = "./app/utilities/price_list.json"
 TZ = "Asia/Seoul"

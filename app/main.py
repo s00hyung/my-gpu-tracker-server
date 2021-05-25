@@ -1,9 +1,9 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from . import crawler
+
+from .server.routers import gpus
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,16 +14,14 @@ app.add_middleware(
 )
 
 
-def update_prices():
-    crawler.start_crawl()
+app.include_router(gpus.router)
 
 
 @app.get("/")
-def read_root():
-    return crawler.read_json()
+def get_root():
+    return {"message": "This is a root"}
 
 
-@app.get("/start")
-def start_crawling(background_tasks: BackgroundTasks):
-    background_tasks.add_task(update_prices)
-    return {"status": "Crawler Added To Background Task!"}
+@app.get("/graph")
+def get_graph():
+    return {"message": "This is a graph"}

@@ -20,8 +20,3 @@ app.include_router(gpus.router)
 @app.get("/")
 def get_root():
     return {"message": "This is a root"}
-
-
-@app.get("/graph")
-def get_graph():
-    return {"message": "This is a graph"}

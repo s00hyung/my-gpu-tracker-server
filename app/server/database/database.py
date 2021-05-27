@@ -1,5 +1,7 @@
 import motor.motor_asyncio
 from dotenv import dotenv_values
+from .status import return_status
+from datetime import datetime, date
 
 config = dotenv_values(".env")
 un = config["MONGO_DB_USERNAME"]
@@ -13,50 +15,118 @@ gpu_collection = database.get_collection("gpu_collection")
 
 
 async def get_all_gpus():
-    gpus = []
+    result = []
     async for gpu in gpu_collection.find():
-        gpus.append(gpu)
-    return gpus
+        result.append(gpu)
+    return return_status(True, "DB read succeeded.", body=result)
 
 
 ############# CRUD OPERATION (CREATE) #############
-async def add_gpu(gpu_data: dict):
-    gpu = await gpu_collection.insert_one(gpu_data)
-    new_gpu = await gpu_collection.find_one({"_id": gpu.inserted_id}, {"_id": 0})
-    return new_gpu
+async def add_gpu(data: dict):
+    data["info_last_updated"] = datetime.now()
+    result = await gpu_collection.insert_one(data)
+    if not result:
+        return return_status(False, "DB insert failed.")
+    else:
+        return return_status(True, "DB insert succeeded.")
 
 
 ############# CRUD OPERATION (READ) #############
 async def get_gpu(id: str):
-    gpu = await gpu_collection.find_one({"_id": id})
-    if gpu:
-        return gpu
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "DB read failed.")
     else:
-        return None
+        return return_status(True, "DB read succeeded.", body=result)
 
 
 ############# CRUD OPERATION (UPDATE) #############
-async def update_gpu():
-    pass
+async def update_gpu(id: str, data: dict):
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "DB update failed (item not found).")
+    else:
+        update_result = await gpu_collection.update_one({"_id": id}, {"$set": data})
+        if not update_result:
+            return return_status(False, "DB update failed (update failed).")
+        else:
+            await gpu_collection.update_one(
+                {"_id": id}, {"$set": {"info_last_updated": datetime.now()}}
+            )
+            return return_status(True, "DB update succeeded.")
 
 
 ############# CRUD OPERATION (DELETE) #############
 async def delete_gpu(id: str):
-    gpu = await get_gpu(id)
-    if gpu:
-        await gpu_collection.delete_one({"_id": id})
-        return True
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "DB delete failed (item not found).")
+    else:
+        delete_result = await gpu_collection.delete_one({"_id": id})
+        if not delete_result:
+            return return_status(False, "DB delete failed (delete failed).")
+        else:
+            return return_status(True, "DB delete succeeded.")
 
 
-async def add_price_of_gpu(id: str, price: dict):
-    gpu = await get_gpu(id)
-    if gpu:
+############# CRUD OPERATION (CREATE) #############
+async def add_gpu_price(id: str, price: dict):
+    price["date"] = datetime.now().strftime("%Y-%m-%d")
+    price["last_updated"] = datetime.now()
+    result = await gpu_collection.find_one({"_id": id})
+    if result:
         updated_gpu = await gpu_collection.update_one(
             {"_id": id}, {"$push": {"price_data": price}}
         )
         if updated_gpu:
-            return True
+            await gpu_collection.update_one(
+                {"_id": id}, {"$set": {"price_last_updated": datetime.now()}}
+            )
+            return return_status(True, "Price insert succeeded.")
         else:
-            return False
+            return return_status(False, "Price insert failed (price not inserted).")
     else:
-        return False
+        return return_status(False, "Price insert failed (gpu not found).")
+
+
+############## CRUD OPERATION (READ) #############
+async def get_gpu_price(id: str):
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "Price read failed (gpu not found).")
+    else:
+        return return_status(True, "Price read succeeded.", body=result["price_data"])
+
+
+############## CRUD OPERATION (UPDATE) #############
+async def update_gpu_price(id: str, price: dict):
+    price["last_updated"] = datetime.now()
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "Price update failed (item not found).")
+    else:
+        update_result = await gpu_collection.update_one(
+            {"_id": id}, {"$set": {"price_data": price}}
+        )
+        if not update_result:
+            return return_status(False, "Price update failed (update failed).")
+        else:
+            await gpu_collection.update_one(
+                {"_id": id}, {"$set": {"price_last_updated": datetime.now()}}
+            )
+            return return_status(True, "Price update succeeded.")
+
+
+############## CRUD OPERATION (DELETE) #############
+async def delete_gpu_price(id: str, date: str):
+    result = await gpu_collection.find_one({"_id": id})
+    if not result:
+        return return_status(False, "Price read failed (gpu not found).")
+    else:
+        delete_result = await gpu_collection.update_one(
+            {"_id": id}, {"$pull": {"price_data": {"date": date}}}
+        )
+        if not delete_result:
+            return return_status(False, "Price delete failed (delete failed).")
+        else:
+            return return_status(True, "Price delete succeeded.")

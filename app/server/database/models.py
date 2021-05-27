@@ -4,13 +4,14 @@ from datetime import datetime
 
 
 class Price(BaseModel):
-    date: str = Field(..., alias="_id")
+    date: str = None
     value: int = Field(...)
     currency: str = Field(...)
+    last_updated: datetime = None
 
     class Config:
         schema_extra = {
-            "example": {"_id": "2021-01-01", "value": 1500000, "currency": "KRW"}
+            "example": {"value": 1500000, "currency": "KRW"},
         }
 
 
@@ -19,24 +20,44 @@ class Gpu(BaseModel):
     name: str = Field(...)
     description: str = Field(...)
     manufacturer: str = Field(...)
-    last_updated: datetime = Field(...)
+    info_last_updated: datetime = None
+    price_last_updated: datetime = None
     price_data: Optional[Price] = Field(default_factory=list)
 
     class Config:
         schema_extra = {
-            "example": {
+            f"example": {
                 "_id": "rtx3090",
                 "name": "NVDIA RTX 3090",
                 "description": "Powerful One.",
                 "manufacturer": "NVDIA",
-                "last_updated": "2021-01-01",
             }
         }
 
 
-class GpuIn(BaseModel):
-    pass
+class GpuUpdate(BaseModel):
+    id: str = Field(..., alias="_id")
+    name: str = None
+    description: str = None
+    manufacturer: str = None
+
+    class Config:
+        schema_extra = {
+            f"example": {
+                "_id": "rtx3090",
+                "name": "NVDIA RTX 3090",
+                "description": "Powerful One.",
+                "manufacturer": "NVDIA",
+            }
+        }
 
 
-class GpuOut(BaseModel):
-    pass
+class PriceUpdate(BaseModel):
+    date: str = Field(...)
+    value: int = Field(...)
+    currency: str = None
+
+    class Config:
+        schema_extra = {
+            "example": {"date": "2021-05-21", "value": 1500000},
+        }

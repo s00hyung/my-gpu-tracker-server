@@ -17,6 +17,6 @@ app.add_middleware(
 app.include_router(gpus.router)
 
 
-@app.get("/")
+@app.get("/", tags=["root"])
 def get_root():
     return {"message": "This is a root"}

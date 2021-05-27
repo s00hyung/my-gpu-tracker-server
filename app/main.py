@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .server.routers import gpus
+from .server.routers import gpus, price
 
 app = FastAPI()
 
@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 
-app.include_router(gpus.router)
+app.include_router(gpus.router, price.router)
 
 
 @app.get("/", tags=["root"])

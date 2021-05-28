@@ -12,7 +12,7 @@ router = APIRouter()
 @router.post("/gpu/price", tags=["price"])
 async def add_gpu_price(id: str, price: models.Price = Body(...)):
     price_encoded = jsonable_encoder(price)
-    if "date" not in price_encoded:
+    if "date" not in price_encoded or not price["date"]:
         price_encoded["date"] = datetime.now().strftime("%Y-%m-%d")
     result = await database.add_gpu_price(id, price_encoded)
     return result

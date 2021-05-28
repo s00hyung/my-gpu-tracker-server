@@ -33,7 +33,7 @@ def extract_and_return_price(url: str) -> str:
 
 
 def start():
-    for gpu in constants.ALL_GPUS_DEV:
+    for gpu in constants.ALL_GPUS:
         average_price = find_average(
             [int(extract_and_return_price(link)) for link in gpu["links"]]
         )

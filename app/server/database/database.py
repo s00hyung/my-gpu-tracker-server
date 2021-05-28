@@ -87,10 +87,21 @@ async def delete_gpu(id: str):
 async def add_gpu_price(id: str, price: dict):
     result = await gpu_collection.find_one({"_id": id})
     if result:
-        updated_gpu = await gpu_collection.update_one(
-            {"_id": id}, {"$push": {"price_data": price}}
+        # Check if price info exists
+        count_if_exists = await gpu_collection.count_documents(
+            {"_id": id, "price_data.date": price["date"]},
         )
-        if not updated_gpu:
+        # If price info does exists:
+        if count_if_exists > 0:
+            update_result = await gpu_collection.update_one(
+                {"_id": id, "price_data.date": price["date"]},
+                {"$set": {"price_data.$": price}},
+            )
+        else:
+            update_result = await gpu_collection.update_one(
+                {"_id": id}, {"$push": {"price_data": price}}
+            )
+        if not update_result:
             return return_status(False, "Price insert failed (price not inserted).")
         else:
             await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
@@ -109,34 +120,34 @@ async def get_gpu_price(id: str):
 
 
 ############## CRUD OPERATION (UPDATE) #############
-async def update_gpu_price(id: str, price: dict):
-    print(price)
-    result = await gpu_collection.find_one({"_id": id})
-    if not result:
-        return return_status(False, "Price update failed (item not found).")
-    else:
-        update_result = await gpu_collection.update_one(
-            {"_id": id, "price_data.date": price["date"]},
-            {"$set": {"price_data.$": price}},
-        )
-        if not update_result:
-            return return_status(False, "Price update failed (update failed).")
-        else:
-            await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
-            return return_status(True, "Price update succeeded.")
+# async def update_gpu_price(id: str, price: dict):
+#     print(price)
+#     result = await gpu_collection.find_one({"_id": id})
+#     if not result:
+#         return return_status(False, "Price update failed (item not found).")
+#     else:
+#         update_result = await gpu_collection.update_one(
+#             {"_id": id, "price_data.date": price["date"]},
+#             {"$set": {"price_data.$": price}},
+#         )
+#         if not update_result:
+#             return return_status(False, "Price update failed (update failed).")
+#         else:
+#             await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
+#             return return_status(True, "Price update succeeded.")
 
 
-############## CRUD OPERATION (DELETE) #############
-async def delete_gpu_price(id: str, date: str):
-    result = await gpu_collection.find_one({"_id": id})
-    if not result:
-        return return_status(False, "Price read failed (gpu not found).")
-    else:
-        delete_result = await gpu_collection.update_one(
-            {"_id": id}, {"$pull": {"price_data": {"date": date}}}
-        )
-        if not delete_result:
-            return return_status(False, "Price delete failed (delete failed).")
-        else:
-            await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
-            return return_status(True, "Price delete succeeded.")
+# ############## CRUD OPERATION (DELETE) #############
+# async def delete_gpu_price(id: str, date: str):
+#     result = await gpu_collection.find_one({"_id": id})
+#     if not result:
+#         return return_status(False, "Price read failed (gpu not found).")
+#     else:
+#         delete_result = await gpu_collection.update_one(
+#             {"_id": id}, {"$pull": {"price_data.$": {"date": date}}}
+#         )
+#         if not delete_result:
+#             return return_status(False, "Price delete failed (delete failed).")
+#         else:
+#             await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
+#             return return_status(True, "Price delete succeeded.")

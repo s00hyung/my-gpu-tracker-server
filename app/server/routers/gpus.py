@@ -30,16 +30,15 @@ async def get_gpu(id: str, response_model_exclude_unset=True):
 
 
 ############# CRUD OPERATION (UPDATE GPU) #############
-@router.put("/gpu", tags=["gpu"])
+@router.put("/gpu/{id}", tags=["gpu"])
 async def update_gpu(id: str, gpu_data: models.GpuUpdate = Body(...)):
-    encoded = jsonable_encoder(gpu_data)
-    print(encoded)
-    result = await database.update_gpu(id, encoded)
+    req = {k: v for k, v in gpu_data.dict().items() if v is not None}
+    result = await database.update_gpu(id, req)
     return result
 
 
 ############# CRUD OPERATION (DELETE GPU) #############
-@router.delete("/gpu", tags=["gpu"])
+@router.delete("/gpu/{id}", tags=["gpu"])
 async def delete_gpu(id: str):
     result = await database.delete_gpu(id)
     return result

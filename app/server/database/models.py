@@ -7,7 +7,6 @@ class Price(BaseModel):
     date: str = None
     value: int = Field(...)
     currency: str = Field(...)
-    last_updated: datetime = None
 
     class Config:
         schema_extra = {
@@ -36,7 +35,7 @@ class Gpu(BaseModel):
 
 
 class GpuUpdate(BaseModel):
-    id: str = Field(..., alias="_id")
+    id: str = None
     name: str = None
     description: str = None
     manufacturer: str = None
@@ -44,7 +43,6 @@ class GpuUpdate(BaseModel):
     class Config:
         schema_extra = {
             f"example": {
-                "_id": "rtx3090",
                 "name": "NVDIA RTX 3090",
                 "description": "Powerful One.",
                 "manufacturer": "NVDIA",
@@ -55,9 +53,9 @@ class GpuUpdate(BaseModel):
 class PriceUpdate(BaseModel):
     date: str = Field(...)
     value: int = Field(...)
-    currency: str = None
+    currency: str = Field(...)
 
     class Config:
         schema_extra = {
-            "example": {"date": "2021-05-21", "value": 1500000},
+            "example": {"date": "2021-05-28", "value": 1200, "currency": "USD"},
         }

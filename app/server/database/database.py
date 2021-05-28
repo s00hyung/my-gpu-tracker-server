@@ -100,12 +100,14 @@ async def get_gpu_price(id: str):
 
 ############## CRUD OPERATION (UPDATE) #############
 async def update_gpu_price(id: str, price: dict):
+    print(price)
     result = await gpu_collection.find_one({"_id": id})
     if not result:
         return return_status(False, "Price update failed (item not found).")
     else:
         update_result = await gpu_collection.update_one(
-            {"_id": id}, {"$set": {"price_data": price}}
+            {"_id": id, "price_data.date": price["date"]},
+            {"$set": {"price_data.$": price}},
         )
         if not update_result:
             return return_status(False, "Price update failed (update failed).")

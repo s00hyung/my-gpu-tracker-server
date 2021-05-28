@@ -1,12 +1,12 @@
 RTX3060 = {
-    "name": "RTX3060",
+    "id": "rtx3060",
     "links": [
         "https://search.shopping.naver.com/catalog/26291310522",
     ],
 }
 
 RTX3070 = {
-    "name": "RTX3070",
+    "id": "rtx3070",
     "links": [
         "https://search.shopping.naver.com/catalog/24715289522",
         "https://search.shopping.naver.com/catalog/26008796530",
@@ -15,7 +15,7 @@ RTX3070 = {
 }
 
 RTX3080 = {
-    "name": "RTX3080",
+    "id": "rtx3080",
     "links": [
         "https://search.shopping.naver.com/catalog/26524880522",
         "https://search.shopping.naver.com/catalog/24874881522",
@@ -23,7 +23,7 @@ RTX3080 = {
 }
 
 RTX3090 = {
-    "name": "RTX3090",
+    "id": "rtx3090",
     "links": [
         "https://search.shopping.naver.com/catalog/24723487523",
         "https://search.shopping.naver.com/catalog/25733875525",
@@ -31,14 +31,14 @@ RTX3090 = {
 }
 
 RTX3060TI = {
-    "name": "RTX3060 TI",
+    "id": "rtx3060ti",
     "links": [
         "https://search.shopping.naver.com/catalog/25092091522",
     ],
 }
 
 RTX2080S = {
-    "name": "RTX2080 SUPER",
+    "id": "rtx2080s",
     "links": [
         "https://search.shopping.naver.com/catalog/20900404384",
         "https://search.shopping.naver.com/catalog/20952208261",
@@ -48,7 +48,7 @@ RTX2080S = {
 }
 
 RTX2070S = {
-    "name": "RTX2070 SUPER",
+    "id": "rtx2070s",
     "links": [
         "https://search.shopping.naver.com/catalog/21032248310",
         "https://search.shopping.naver.com/catalog/20052562449",
@@ -57,7 +57,7 @@ RTX2070S = {
 }
 
 RTX2060S = {
-    "name": "RTX2060 SUPER",
+    "id": "rtx2060s",
     "links": [
         "https://search.shopping.naver.com/catalog/27011085528",
         "https://search.shopping.naver.com/catalog/20052562451",
@@ -66,12 +66,16 @@ RTX2060S = {
 }
 
 RTX2060 = {
-    "name": "RTX2060",
+    "id": "rtx2060",
     "links": [
         "https://search.shopping.naver.com/catalog/27177973522",
         "https://search.shopping.naver.com/catalog/27011085528",
     ],
 }
+
+ALL_GPUS_DEV = [
+    RTX3090,
+]
 
 ALL_GPUS = [
     RTX2060,
@@ -85,5 +89,4 @@ ALL_GPUS = [
     RTX3090,
 ]
 
-JSON_DIR = "./app/utilities/price_list.json"
 TZ = "Asia/Seoul"

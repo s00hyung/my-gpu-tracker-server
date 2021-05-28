@@ -14,7 +14,8 @@ app.add_middleware(
 )
 
 
-app.include_router(gpus.router, price.router)
+app.include_router(gpus.router)
+app.include_router(price.router)
 
 
 @app.get("/", tags=["root"])

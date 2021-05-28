@@ -13,7 +13,6 @@ router = APIRouter()
 async def add_gpu_price(id: str, price: models.Price = Body(...)):
     price_encoded = jsonable_encoder(price)
     price_encoded["date"] = datetime.now().strftime("%Y-%m-%d")
-    price_encoded["last_updated"] = datetime.now()
     result = await database.add_gpu_price(id, price_encoded)
     return result
 
@@ -28,9 +27,8 @@ async def get_gpu_price(id: str, response_model_exclude_unset=True):
 ############# CRUD OPERATION (UPDATE PRICE) #############
 @router.put("/gpu/price/{id}", tags=["price"])
 async def update_gpu_price(id: str, price_data: models.PriceUpdate = Body(...)):
-    price_encoded = jsonable_encoder(price_data)
-    price_encoded["last_updated"] = datetime.now()
-    result = await database.update_gpu_price(id, price_encoded)
+    req = {k: v for k, v in price_data.dict().items() if v is not None}
+    result = await database.update_gpu_price(id, req)
     return result
 
 

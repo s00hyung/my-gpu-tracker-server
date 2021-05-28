@@ -3,10 +3,20 @@ from dotenv import dotenv_values
 from .status import return_status
 from datetime import datetime
 
-config = dotenv_values(".env")
-un = config["MONGO_DB_USERNAME"]
-pw = config["MONGO_DB_PASSWORD"]
-url = config["MONGO_DB_URL"]
+production = True
+
+if production:
+    import os
+
+    un = os.environ["MONGO_DB_USERNAME"]
+    pw = os.environ["MONGO_DB_PASSWORD"]
+    url = os.environ["MONGO_DB_URL"]
+else:
+    config = dotenv_values(".env")
+    un = config["MONGO_DB_USERNAME"]
+    pw = config["MONGO_DB_PASSWORD"]
+    url = config["MONGO_DB_URL"]
+
 
 MONGODB_URL = f"mongodb+srv://{un}:{pw}@{url}"
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)

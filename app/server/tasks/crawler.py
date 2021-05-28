@@ -35,7 +35,7 @@ async def extract_and_return_price(url: str) -> str:
 async def start():
     for gpu in constants.ALL_GPUS_DEV:
         average_price = find_average(
-            [int(extract_and_return_price(link)) for link in gpu["links"]]
+            [int(await extract_and_return_price(link)) for link in gpu["links"]]
         )
         params = {"id": gpu["id"]}
         data = {"value": average_price, "currency": "KRW"}

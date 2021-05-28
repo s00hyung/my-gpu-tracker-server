@@ -20,10 +20,10 @@ def find_average(l: list):
     return math.floor(sum(l) / len(l))
 
 
-async def extract_and_return_price(url: str) -> str:
+def extract_and_return_price(url: str) -> str:
     try:
-        req = await requests.get(url)
-        soup = await BeautifulSoup(req.text, features="html.parser")
+        req = requests.get(url)
+        soup = BeautifulSoup(req.text, features="html.parser")
         # <em class="lowestPrice_num__3AlQ-">1,356,060</em>
         selected = soup.select("div > em")[0]
         # 1,356,060
@@ -32,14 +32,14 @@ async def extract_and_return_price(url: str) -> str:
         return None
 
 
-async def start():
+def start():
     for gpu in constants.ALL_GPUS_DEV:
         average_price = find_average(
-            [int(await extract_and_return_price(link)) for link in gpu["links"]]
+            [int(extract_and_return_price(link)) for link in gpu["links"]]
         )
         params = {"id": gpu["id"]}
         data = {"value": average_price, "currency": "KRW"}
-        await requests.post(SERVER_URL, params=params, json=data)
+        requests.post(SERVER_URL, params=params, json=data)
 
 
 if __name__ == "__main__":

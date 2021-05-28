@@ -19,8 +19,8 @@ app.include_router(gpus.router)
 app.include_router(price.router)
 
 
-async def start_crawling():
-    await crawler.start()
+def start_crawling():
+    crawler.start()
 
 
 @app.get("/", tags=["root"])

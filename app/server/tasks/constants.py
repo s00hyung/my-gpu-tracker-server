@@ -74,6 +74,10 @@ RTX2060 = {
 }
 
 ALL_GPUS_DEV = [
+    RTX3060,
+    RTX3060TI,
+    RTX3070,
+    RTX3080,
     RTX3090,
 ]
 

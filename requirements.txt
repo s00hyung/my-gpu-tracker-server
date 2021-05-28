@@ -7,4 +7,3 @@ pytz
 motor
 dnspython
 python-dotenv
-boto

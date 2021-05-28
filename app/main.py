@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 
 from .server.routers import gpus, price
+from .server.tasks import crawler
 
 app = FastAPI()
 
@@ -18,6 +19,11 @@ app.include_router(gpus.router)
 app.include_router(price.router)
 
 
+def start_crawling():
+    crawler.start()
+
+
 @app.get("/", tags=["root"])
-def get_root():
+def get_root(background_tasks: BackgroundTasks):
+    background_tasks.add_task(start_crawling)
     return {"message": "This is a root"}

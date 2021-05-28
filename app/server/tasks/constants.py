@@ -30,7 +30,7 @@ RTX3080 = {
 RTX3090 = {
     "id": "rtx3090",
     "links": [
-        "https://search.shopping.naver.com/catalog/24723487523"
+        "https://search.shopping.naver.com/catalog/24723487523",
         "https://search.shopping.naver.com/catalog/25733875525",
         "https://search.shopping.naver.com/catalog/27300125522",
         "https://search.shopping.naver.com/catalog/27300160522",

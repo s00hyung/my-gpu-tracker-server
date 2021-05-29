@@ -1,11 +1,13 @@
-import motor.motor_asyncio
+import motor.motor_asyncio, configparser
 from dotenv import dotenv_values
 from .status import return_status
-from datetime import datetime
+from .. import utilities
 
-production = True
+config = configparser.ConfigParser()
+config.read("conf.ini")
+IS_PRODUCTION = config["DATABASE"].getboolean("production")
 
-if production:
+if IS_PRODUCTION:
     import os
 
     un = os.environ["MONGO_DB_USERNAME"]
@@ -42,7 +44,8 @@ async def add_gpu(data: dict):
         return return_status(False, "DB insert failed.")
     else:
         await update_command(
-            result.inserted_id, {"$set": {"info_last_updated": datetime.now()}}
+            result.inserted_id,
+            {"$set": {"info_last_updated": utilities.get_current_time()}},
         )
         return return_status(True, "DB insert succeeded.")
 
@@ -66,7 +69,9 @@ async def update_gpu(id: str, data: dict):
         if not update_result:
             return return_status(False, "DB update failed (update failed).")
         else:
-            await update_command(id, {"$set": {"info_last_updated": datetime.now()}})
+            await update_command(
+                id, {"$set": {"info_last_updated": utilities.get_current_time()}}
+            )
             return return_status(True, "DB update succeeded.")
 
 
@@ -104,7 +109,9 @@ async def add_gpu_price(id: str, price: dict):
         if not update_result:
             return return_status(False, "Price insert failed (price not inserted).")
         else:
-            await update_command(id, {"$set": {"price_last_updated": datetime.now()}})
+            await update_command(
+                id, {"$set": {"price_last_updated": utilities.get_current_time()}}
+            )
             return return_status(True, "Price insert succeeded.")
     else:
         return return_status(False, "Price insert failed (gpu not found).")

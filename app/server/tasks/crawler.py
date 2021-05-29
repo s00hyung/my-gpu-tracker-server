@@ -1,19 +1,19 @@
-import requests, math
+import requests, math, configparser
 from bs4 import BeautifulSoup
 from dotenv import dotenv_values
 from . import constants
 
-production = True
+config = configparser.ConfigParser()
+config.read("conf.ini")
+IS_PRODUCTION = config["TASKS"].getboolean("production")
 
-if production:
+if IS_PRODUCTION:
     import os
 
     SERVER_URL = os.environ["SERVER_URL"]
 else:
     config = dotenv_values(".env")
-    un = config["MONGO_DB_USERNAME"]
-    pw = config["MONGO_DB_PASSWORD"]
-    url = config["MONGO_DB_URL"]
+    SERVER_URL = config["SERVER_URL"]
 
 
 def find_average(l: list):

@@ -3,8 +3,7 @@ from fastapi.encoders import jsonable_encoder
 
 from ..database import database
 from ..database import models
-
-from datetime import datetime
+from .. import utilities
 
 router = APIRouter()
 
@@ -12,7 +11,7 @@ router = APIRouter()
 @router.post("/gpu/price", tags=["price"])
 async def add_gpu_price(id: str, price: models.Price = Body(...)):
     price_encoded = jsonable_encoder(price)
-    price_encoded["date"] = datetime.now().strftime("%Y-%m-%d")
+    price_encoded["date"] = utilities.get_today_date()
     result = await database.add_gpu_price(id, price_encoded)
     return result
 

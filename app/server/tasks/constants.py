@@ -51,7 +51,7 @@ RTX3080TI = {
     "id": "rtx3080ti",
     "links": [
         "https://search.shopping.naver.com/catalog/27471689522",
-        "https://search.shopping.naver.com/catalog/2747296552",
+        "https://search.shopping.naver.com/catalog/27472965522",
         "https://search.shopping.naver.com/catalog/27470886525",
     ],
 }

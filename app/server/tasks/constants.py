@@ -47,22 +47,14 @@ RTX3060TI = {
     ],
 }
 
-RTX3080TI = [
+RTX3080TI = {
     "id": "rtx3080ti",
     "links": [
         "https://search.shopping.naver.com/catalog/27471689522",
         "https://search.shopping.naver.com/catalog/2747296552",
-        "https://search.shopping.naver.com/catalog/27470886525"
-    ]
-]
+        "https://search.shopping.naver.com/catalog/27470886525",
+    ],
+}
 
 
-ALL_GPUS = [
-    RTX3060,
-    RTX3060TI,
-    RTX3070,
-    RTX3080,
-    RTX3090,
-    RTX3080TI
-]
-
+ALL_GPUS = [RTX3060, RTX3060TI, RTX3070, RTX3080, RTX3090, RTX3080TI]
